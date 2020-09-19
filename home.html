@@ -2,16 +2,39 @@
 <html>
 <head>
 <meta name="viewport"content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-<script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+<script>
 
+    x = 39.5650137;
+    y = 2.6450338;
+
+    var theUrl = api.jawg.io/elevations?locations=x,y&access-token={https://api.jawg.io/elevations?locations={locations}&access-token={your-access-token};
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    alert(xmlHttp.responseText);
+</script>
 </head>
 <body>
 
 <h1>Sailing route planning route</h1>
 
-<div id="windy" onclick="getCoordinatesClient(event)"></div>
+
+Punto inicio: <input type="text" placeholder="Latitud" id="latitudeStart"><input type="text" placeholder="Longitud" id="longitudeStart">
+<br>
+Punto Llegada: <input type="text" placeholder="Latitud" id="latitudeDestination"><input type="text" placeholder="Longitud" id="longitudeDestination">
+<br>
+<button type="button" onclick="getCoordinatesByForm();">GO</button>
+
+
+<div id="mapid" onclick="getCoordinatesClient(event)"></div>
 <script src="script.js"></script>
 <div id="demo"></div>
 <div id="demo2"></div>

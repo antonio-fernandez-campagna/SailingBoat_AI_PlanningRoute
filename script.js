@@ -1,37 +1,38 @@
-const options = {
-    // Required: API key
-    key: '3wxwm4eBQW1ExUnI36k36OabrGCpPvKX', // REPLACE WITH YOUR KEY !!!
+//3wxwm4eBQW1ExUnI36k36OabrGCpPvKX
+var mymap = L.map('mapid').setView([39.1, 1.77], 8);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1Ijoibmlub2ZkeiIsImEiOiJja2VvaWUxa2QyN3YxMnNwY3BkNHY1eGdvIn0.W4tN1eMuhJ_lFd4lGtUhZA'
+}).addTo(mymap);
 
-    // Put additional console output
-    verbose: true,
+var coord = new mymap.MercatorCoordinate(39.6735, 2.357); // 6914.281956295339
+alert(coord.toAltitude())
 
-    // Optional: Initial state of the map
-    lat: 39.6136888,
-    lon: 2.6307834,
-    zoom: 6,
-};
+function getCoordinatesByForm() {
 
-// Initialize Windy API
-windyInit(options, windyAPI => {
-    // windyAPI is ready, and contain 'map', 'store',
-    // 'picker' and other usefull stuff
+  var latitudeStart = document.getElementById("latitudeStart").value;
+  var longitudeStart = document.getElementById("longitudeStart").value;
+  var latitudeDestination = document.getElementById("latitudeDestination").value;
+  var longitudeDestination = document.getElementById("longitudeDestination").value;
 
-    const  {map}  = windyAPI;
-    // .map is instance of Leaflet map
 
-    L.popup()
-        .setLatLng([39.6, 2.63])
-        .setContent('Hello World')
-        .openOn(map);
+  var start = [latitudeStart, longitudeStart];
+  var destination = [latitudeDestination, longitudeDestination];
 
-});
 
-function getCoordinatesClient(event){
-    var cX = event.clientX;
-    var cY = event.clientY;
-    var coords1 = "Screen: X: " + cX + ", Y coords: " + cY;
-    document.getElementById("demo").innerHTML = coords1;
+  var polyline = L.polyline(var_test_lan, {color: 'red'}).addTo(mymap);
+  // zoom the map to the polyline
 
-    var coordinate = L.map.panBy(L.point(200, 300));
-    document.getElementById("demo2").innerHTML = coordinate;
+  map.fitBounds(polyline.getBounds());
+
+}
+
+
+
+function create_map(start, destination){
+
 }
